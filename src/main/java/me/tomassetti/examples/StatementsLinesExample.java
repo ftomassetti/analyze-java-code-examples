@@ -22,7 +22,8 @@ public class StatementsLinesExample {
                     @Override
                     public boolean handle(Node node) {
                         if (node instanceof Statement) {
-                            System.out.println(" [Lines " + node.getBeginLine() + " - " + node.getEndLine() + " ] " + node);
+                            System.out.println(" [Lines " + node.getBegin().get().line
+                                    + " - " + node.getEnd().get().line + " ] " + node);
                             return false;
                         } else {
                             return true;
@@ -30,7 +31,7 @@ public class StatementsLinesExample {
                     }
                 }).explore(JavaParser.parse(file));
                 System.out.println(); // empty line
-            } catch (ParseException | IOException e) {
+            } catch (IOException e) {
                 new RuntimeException(e);
             }
         }).explore(projectDir);

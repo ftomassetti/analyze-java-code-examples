@@ -21,11 +21,11 @@ public class MethodCallsExample {
                     @Override
                     public void visit(MethodCallExpr n, Object arg) {
                         super.visit(n, arg);
-                        System.out.println(" [L " + n.getBeginLine() + "] " + n);
+                        System.out.println(" [L " + n.getBegin().get().line + "] " + n);
                     }
                 }.visit(JavaParser.parse(file), null);
                 System.out.println(); // empty line
-            } catch (ParseException | IOException e) {
+            } catch (IOException e) {
                 new RuntimeException(e);
             }
         }).explore(projectDir);

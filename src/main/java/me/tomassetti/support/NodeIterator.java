@@ -15,7 +15,7 @@ public class NodeIterator {
 
     public void explore(Node node) {
         if (nodeHandler.handle(node)) {
-            for (Node child : node.getChildrenNodes()) {
+            for (Node child : node.getChildNodes()) {
                 explore(child);
             }
         }

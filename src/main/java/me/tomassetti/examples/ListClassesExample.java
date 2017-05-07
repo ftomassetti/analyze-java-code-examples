@@ -25,7 +25,7 @@ public class ListClassesExample {
                     }
                 }.visit(JavaParser.parse(file), null);
                 System.out.println(); // empty line
-            } catch (ParseException | IOException e) {
+            } catch (IOException e) {
                 new RuntimeException(e);
             }
         }).explore(projectDir);
