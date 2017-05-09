@@ -3,3 +3,4 @@
 .gradle
 *.ipr
 *.iws
+out
