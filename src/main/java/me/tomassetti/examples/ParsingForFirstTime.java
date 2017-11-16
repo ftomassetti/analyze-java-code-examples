@@ -17,7 +17,7 @@ public class ParsingForFirstTime {
         Expression expressionNode = JavaParser.parseExpression("1 + 2");
 
         // Parse a body declaration: it could be either a field or a method or an inner class
-        BodyDeclaration methodNode = JavaParser.parseClassBodyDeclaration(
+        BodyDeclaration methodNode = JavaParser.parseBodyDeclaration(
                 "boolean invert(boolean aFlag) { return !p; }");
 
         // Parse the code of an entire source file, a.k.a. a Compilation Unit

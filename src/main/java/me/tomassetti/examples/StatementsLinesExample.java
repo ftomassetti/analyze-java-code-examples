@@ -18,16 +18,13 @@ public class StatementsLinesExample {
             System.out.println(path);
             System.out.println(Strings.repeat("=", path.length()));
             try {
-                new NodeIterator(new NodeIterator.NodeHandler() {
-                    @Override
-                    public boolean handle(Node node) {
-                        if (node instanceof Statement) {
-                            System.out.println(" [Lines " + node.getBegin().get().line
-                                    + " - " + node.getEnd().get().line + " ] " + node);
-                            return false;
-                        } else {
-                            return true;
-                        }
+                new NodeIterator(node -> {
+                    if (node instanceof Statement) {
+                        System.out.println(" [Lines " + node.getBegin().get().line
+                                + " - " + node.getEnd().get().line + " ] " + node);
+                        return false;
+                    } else {
+                        return true;
                     }
                 }).explore(JavaParser.parse(file));
                 System.out.println(); // empty line
