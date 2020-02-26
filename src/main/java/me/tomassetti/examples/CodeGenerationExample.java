@@ -19,11 +19,11 @@ public class CodeGenerationExample {
         compilationUnit.addImport("java.util", false, true);
 
         // Create a class (not an interface, so the 2nd parameter is false)
-        ClassOrInterfaceDeclaration myClass = compilationUnit.addClass("MyClass", Modifier.PUBLIC);
-        myClass.addField("List<String>", "elements", Modifier.PRIVATE);
+        ClassOrInterfaceDeclaration myClass = compilationUnit.addClass("MyClass", Modifier.Keyword.PUBLIC);
+        myClass.addField("List<String>", "elements", Modifier.Keyword.PRIVATE);
 
         // Method to add an element to the field
-        MethodDeclaration addElement = myClass.addMethod("addElement", Modifier.PUBLIC);
+        MethodDeclaration addElement = myClass.addMethod("addElement", Modifier.Keyword.PUBLIC);
         // our method get a parameter: the value to add to the field
         addElement.addParameter("String", "newElement");
         // the body consists in one expression wrapped into a statement
@@ -35,7 +35,7 @@ public class CodeGenerationExample {
         ));
 
         // Method to get elements
-        MethodDeclaration getElements = myClass.addMethod("getElements", Modifier.PUBLIC);
+        MethodDeclaration getElements = myClass.addMethod("getElements", Modifier.Keyword.PUBLIC);
         // we specify that we are returning a Collection of String
         getElements.setType("Collection<String>");
         // The body consists of just a return statement. We return the

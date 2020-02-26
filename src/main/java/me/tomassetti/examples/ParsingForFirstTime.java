@@ -1,6 +1,6 @@
 package me.tomassetti.examples;
 
-import com.github.javaparser.JavaParser;
+import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.BodyDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
@@ -14,14 +14,14 @@ public class ParsingForFirstTime {
 
     public static void main(String[] args) {
         // Parse an expression
-        Expression expressionNode = JavaParser.parseExpression("1 + 2");
+        Expression expressionNode = StaticJavaParser.parseExpression("1 + 2");
 
         // Parse a body declaration: it could be either a field or a method or an inner class
-        BodyDeclaration methodNode = JavaParser.parseClassBodyDeclaration(
+        BodyDeclaration<?> methodNode = StaticJavaParser.parseBodyDeclaration(
                 "boolean invert(boolean aFlag) { return !p; }");
 
         // Parse the code of an entire source file, a.k.a. a Compilation Unit
-        CompilationUnit compilationUnitNode = JavaParser.parse("class A { int aField; }");
+        CompilationUnit compilationUnitNode = StaticJavaParser.parse("class A { int aField; }");
 
         // If we know the expression is a binary expression we can cast it and access more
         // specific information like the element on the left and on the right and the operator
