@@ -1,12 +1,9 @@
 package me.tomassetti.examples;
 
-import com.github.javaparser.JavaParser;
-import com.github.javaparser.ParseException;
-import com.github.javaparser.ast.Node;
+import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.stmt.Statement;
 import com.google.common.base.Strings;
 import me.tomassetti.support.DirExplorer;
-import me.tomassetti.support.NodeIterator;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,21 +15,13 @@ public class StatementsLinesExample {
             System.out.println(path);
             System.out.println(Strings.repeat("=", path.length()));
             try {
-                new NodeIterator(new NodeIterator.NodeHandler() {
-                    @Override
-                    public boolean handle(Node node) {
-                        if (node instanceof Statement) {
-                            System.out.println(" [Lines " + node.getBegin().get().line
-                                    + " - " + node.getEnd().get().line + " ] " + node);
-                            return false;
-                        } else {
-                            return true;
-                        }
-                    }
-                }).explore(JavaParser.parse(file));
+                StaticJavaParser.parse(file)
+                        .findAll(Statement.class)
+                        .forEach(statement -> System.out.println(" [Lines " + statement.getBegin().get().line
+                                + " - " + statement.getEnd().get().line + " ] " + statement));
                 System.out.println(); // empty line
             } catch (IOException e) {
-                new RuntimeException(e);
+                throw new RuntimeException(e);
             }
         }).explore(projectDir);
     }

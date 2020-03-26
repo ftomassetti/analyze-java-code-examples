@@ -1,7 +1,6 @@
 package me.tomassetti.examples;
 
-import com.github.javaparser.JavaParser;
-import com.github.javaparser.ParseException;
+import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.google.common.base.Strings;
@@ -23,10 +22,10 @@ public class MethodCallsExample {
                         super.visit(n, arg);
                         System.out.println(" [L " + n.getBegin().get().line + "] " + n);
                     }
-                }.visit(JavaParser.parse(file), null);
+                }.visit(StaticJavaParser.parse(file), null);
                 System.out.println(); // empty line
             } catch (IOException e) {
-                new RuntimeException(e);
+                throw new RuntimeException(e);
             }
         }).explore(projectDir);
     }

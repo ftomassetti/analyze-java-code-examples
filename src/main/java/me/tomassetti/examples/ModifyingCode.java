@@ -1,17 +1,14 @@
 package me.tomassetti.examples;
 
-import com.github.javaparser.JavaParser;
+import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Modifier;
-import com.github.javaparser.ast.body.BodyDeclaration;
-import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.*;
 import com.github.javaparser.ast.stmt.ExpressionStmt;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.stream.Collectors;
 
 import static java.io.File.separator;
 
@@ -35,7 +32,7 @@ public class ModifyingCode {
         String pathToExamplesDir = "." + separator + "src"
                 + separator + "main" + separator + "resources";
         // Parse the code of an entire source file, a.k.a. a Compilation Unit
-        CompilationUnit compilationUnitNode = JavaParser.parse(new File(pathToExamplesDir
+        CompilationUnit compilationUnitNode = StaticJavaParser.parse(new File(pathToExamplesDir
                 + separator + "ASimpleClass.java"));
         printCompilationUnit("My original class", compilationUnitNode);
 
@@ -47,7 +44,7 @@ public class ModifyingCode {
         // Adding a method: we add a setter
         MethodDeclaration setter = compilationUnitNode
                 .getClassByName("MyRenamedClass").get()
-                .addMethod("setAField", Modifier.PUBLIC);
+                .addMethod("setAField", Modifier.Keyword.PUBLIC);
         setter.addParameter("boolean", "aField");
         setter.getBody().get().getStatements().add(new ExpressionStmt(
                 new AssignExpr(
