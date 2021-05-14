@@ -18,7 +18,7 @@ public class ParsingForFirstTime {
 
         // Parse a body declaration: it could be either a field or a method or an inner class
         BodyDeclaration<?> methodNode = StaticJavaParser.parseBodyDeclaration(
-                "boolean invert(boolean aFlag) { return !p; }");
+                "boolean invert(boolean aFlag) { return !aFlag; }");
 
         // Parse the code of an entire source file, a.k.a. a Compilation Unit
         CompilationUnit compilationUnitNode = StaticJavaParser.parse("class A { int aField; }");
